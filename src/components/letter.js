@@ -1,6 +1,9 @@
-function Letter({letter}) {
+function Letter({letter, status, update}) {
     return (
-        <span>{letter}</span>
+        <span
+            className={status ? 'selected' : 'unselected'}
+            {...((update === false || status) ? {} : {onClick: () => update(letter)}) }
+        >{letter}</span>
     );
 }
 

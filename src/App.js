@@ -1,18 +1,57 @@
+import { useState } from 'react';
 import './App.css';
 import Solution from './components/solution';
 import Score from './components/score';
 import Letters from './components/letters';
+import EndGame from './components/endGame';
+import RestartGame from './components/restartGame';
 
 function App() {
 
-  let solution = ['_', '_', '_', '_', '_']
-  let score = 100
+  const generateLetterStatuses = () => {
+    let letterStatus = {}
+    for (let i = 65; i < 91; i++) {
+      letterStatus[String.fromCharCode(i)] = false
+    }
+    return letterStatus
+  }
+
+  const selectLetter = (l) => {
+    updateScore(l)
+    setLetterStatus({...letterStatus, [l]:true })
+  }
+
+  const updateScore = (letter) => {
+    if(solution.word.indexOf(letter) > -1){
+      setScore(score + 5)
+      setSolution({...solution, guessedLetters: solution.guessedLetters + 1})
+    } else {
+      setScore(score - 20)
+    }
+  }
+
+  const restartGame = () => {
+    setSolution({word:'REACT', hint: 'One of the most famous JS frameworks', guessedLetters:0})
+    setScore(100)
+    setLetterStatus(generateLetterStatuses())
+  }
+
+  let [solution, setSolution] = useState({word:'REACT', hint: 'One of the most famous JS frameworks', guessedLetters:0})
+  let [score, setScore] = useState(100)
+  let [letterStatus, setLetterStatus] = useState(generateLetterStatuses())
 
   return (
-    <div class="container container-app">
+    <div className="container container-app">
       <Score score={score} />
-      <Solution solution={solution} />
-      <Letters />
+      <Solution solution={solution} letterStatus={letterStatus} />
+
+      {(score <= 0 || solution.word.length == solution.guessedLetters) ? 
+        <EndGame win={(score > 0)}/> 
+        : 
+        <Letters letterStatus={letterStatus} update={selectLetter} />
+      }
+
+      <RestartGame restart={restartGame} />
     </div>
   );
 }

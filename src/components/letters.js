@@ -1,12 +1,13 @@
 import Letter from "./letter";
 
-function Letters() {
-    const letters = ['a', 'b', 'c', 'd']
-
+function Letters({letterStatus, update}) {   
     return (
         <div className="container container-letters">
-            <div>Available letter:</div>
-            {letters.map(l => <Letter letter={l} /> )}
+            <div>Available letters:</div>
+
+            {Object.keys(letterStatus).map(
+                l => <Letter key={"letter-" + l} letter={l} status={letterStatus[l]} update={update} />
+            )}
         </div>
     );
 }

@@ -1,12 +1,80 @@
 .container{
   margin:10px;
 }
-.container-solution span{
-  padding:0 5px 5px 0px;
-  font-size:20px;
+
+.container-app{
+  width:96%;
+  max-width:500px;  
+  margin: 10px auto;
+  border:2px solid gray;
+  border-radius: 10px;
+  background: lightgray;
 }
 
+.container-solution div.word span{
+  border:1px solid darkblue;
+  width:40px;
+  height:40px;
+  display:inline-block;
+  font-size:25px;
+  line-height: 40px;
+  text-align: center;
+  margin-right:5px;
+  margin-bottom:10px; 
+}
+.container-solution div.word span.selected{
+  color:green;
+  font-weight: bold;
+}
+.container-solution div.word span.unselected{
+  color:gray;
+}
 .container-letters span{
-  padding:0 5px 5px 0px;
-  font-size:30px;
+  font-size:25px;
+  line-height:30px;
+  text-align: center;
+  cursor: pointer;
+  display:inline-block;
+  width:30px;
+  height:30px;
+  border:1px solid gray;
+  border-radius: 5px;
+  background-color: lightgoldenrodyellow;
+  margin:5px 5px 0px 0;
+}
+
+.container-letters span.selected{
+  text-decoration: line-through;
+  background-color:lightslategray;
+  color:lightgray;
+  cursor: default;
+}
+.container-letters span.unselected:hover{
+  background-color: lightcoral;
+}
+
+.container-score span{
+  padding-left:10px;
+  font-weight:bold;
+}
+.container-score span.high{
+  color:green;
+}
+
+.container-score span.medium{
+  color:orange;
+}
+
+.container-score span.low{
+  color:red;
+}
+
+div.win{
+  font-size:20px;
+  color:green;
+}
+
+div.gameover{
+  font-size:20px;
+  color:red;
 }
