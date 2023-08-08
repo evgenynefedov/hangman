@@ -22,9 +22,11 @@ function App() {
   }
 
   const updateScore = (letter) => {
-    if(solution.word.indexOf(letter) > -1){
-      setScore(score + 5)
-      setSolution({...solution, guessedLetters: solution.guessedLetters + 1})
+    let guessedLetterQuantity = (solution.word.match(new RegExp(letter, "g")) || []).length
+
+    if(guessedLetterQuantity){
+      setScore(score + 5*guessedLetterQuantity)
+      setSolution({...solution, guessedLetters: solution.guessedLetters + 1*guessedLetterQuantity})
     } else {
       setScore(score - 20)
     }
